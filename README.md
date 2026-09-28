@@ -45,6 +45,7 @@ harus mengubah warna tombol, tautan, judul, dan garis fokus.
 
 ### Rencana kerangka halaman
 
+```text
 Baris 1: header                         (auto)
 Baris 2: isi                            (1fr)
 Baris 3: footer                         (auto)
@@ -56,3 +57,4 @@ Kolom isi:
 │               │ Pendidikan               │
 └───────────────┴──────────────────────────┘
 Sertifikasi berada setelah area grid.
+```
