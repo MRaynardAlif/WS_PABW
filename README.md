@@ -40,3 +40,40 @@ Tulis bagian yang dibantu AI:
  
 Kriteria selesai saya: mengubah --color-primary di satu baris
 harus mengubah warna tombol, tautan, judul, dan garis fokus.
+
+## Pertemuan 5 — Layout modern dengan Flexbox dan Grid
+
+### Rencana kerangka halaman
+
+```text
+Baris 1: header                         (auto)
+Baris 2: isi                            (1fr)
+Baris 3: footer                         (auto)
+
+Kolom isi:
+┌───────────────┬──────────────────────────┐
+│ Profil        │ Pengalaman kerja         │
+│ (sidebar)     ├──────────────────────────┤
+│               │ Pendidikan               │
+└───────────────┴──────────────────────────┘
+Sertifikasi berada setelah area grid.
+```
+
+- `.page` memakai grid tiga baris `auto 1fr auto`.
+- `.isi` memakai dua kolom `16rem minmax(0, 1fr)` dan area bernama `sisi`,
+  `utama`, dan `bawah`.
+- Navbar dan kaki kartu menggunakan Flexbox karena menyusun elemen dalam satu
+  arah.
+- Kerangka halaman dan galeri kartu menggunakan Grid karena menyusun baris dan
+  kolom. Galeri memakai `repeat(auto-fit, minmax(16rem, 1fr))` agar jumlah
+  kolom mengikuti lebar yang tersedia.
+- Isi kartu memakai Flexbox kolom; kaki kartu memakai Flexbox baris agar periode
+  dan kategori terpisah rapi.
+- Pilihan pola: header memakai Flexbox karena judul dan menu disusun satu baris;
+  isi memakai Grid karena membutuhkan sidebar dan konten; galeri memakai Grid
+  adaptif; isi kartu memakai Flexbox kolom.
+- Navbar menyusun item secara horizontal dengan sumbu utama horizontal dan
+  sumbu silang vertikal. Kaki kartu memakai arah baris; item akan membungkus
+  bila ruangnya sempit.
+- Penempatan blok menggunakan area bernama: profil pada `sisi`, pengalaman pada
+  `utama`, dan pendidikan pada `bawah`.
