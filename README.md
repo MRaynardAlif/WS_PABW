@@ -14,13 +14,6 @@ Topik halaman saya: CV Saya.
 - Kolom tabel: Riwayat pendidikan, Institusi, Mulai, Selesai, Program
 - Kolom form: Sertifikasi, Nama sertifikasi, Tanggal sertifikasi, Deskripsi sertifikasi
 - Gambar: profil.svg
- 
-## Catatan penggunaan AI
- 
-Tulis bagian yang dibantu AI:
-1. Merapihkan Indentasi
-2. Optimasi Code
-3. Praktik Arsitektur Clean Code
 
 ## Pertemuan 4 — Design token halaman profil
  
@@ -58,3 +51,12 @@ Kolom isi:
 └───────────────┴──────────────────────────┘
 Sertifikasi berada setelah area grid.
 ```
+
+## Catatan penggunaan AI
+ 
+Tulis bagian yang dibantu AI:
+1. Merapihkan Indentasi
+2. Optimasi Code
+3. Praktik Arsitektur Clean Code
+4. Memahami instruksi worksheet
+5. Memahami cara memeriksa hasil di Console
