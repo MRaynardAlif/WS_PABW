@@ -53,8 +53,24 @@ input:user-invalid {
 }
 
 /* Pesan galat: sembunyikan selama belum tidak-sah, tampilkan saat perlu */
-.pesan-galat       { display: none; color: var(--color-danger); font-size: var(--text-sm); }
-.form-kolom:has(input:user-invalid) .pesan-galat { display: block; }
+//.pesan-galat       { display: none; color: var(--color-danger); font-size: var(--text-sm); }
+//.form-kolom:has(input:user-invalid) .pesan-galat { display: block; }
+
+.pesan-galat {
+  display: none;
+  color: var(--color-danger);
+  font-size: var(--text-sm);
+}
+
+.pesan-galat.is-visible {
+  display: block;
+}
+
+input[aria-invalid="true"] {
+  border-color: var(--color-danger);
+  border-width: 2px;
+}
+
 
 .tombol-tema {
   display: inline-block;

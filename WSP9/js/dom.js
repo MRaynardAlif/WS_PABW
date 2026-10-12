@@ -31,3 +31,49 @@ barisFilter.addEventListener("click", (event) => {
 
   renderProyek(terpilih);
 });
+
+const formSertifikasi = document.querySelector("#form-sertifikasi");
+const tombolKirim = formSertifikasi.querySelector('button[type="submit"]');
+
+const kolomForm = Array.from(
+  formSertifikasi.querySelectorAll(".form-kolom")
+).map((kolom) => ({
+  input: kolom.querySelector("input"),
+  pesan: kolom.querySelector(".pesan-galat"),
+}));
+
+let sudahMencobaKirim = false;
+
+function periksaForm() {
+  const hasil = kolomForm.map(({ input, pesan }) => {
+    const sah = input.value.trim() !== "" && input.validity.valid;
+
+    if (sudahMencobaKirim) {
+      input.setAttribute("aria-invalid", String(!sah));
+    }
+
+    pesan.classList.toggle("is-visible", sudahMencobaKirim && !sah);
+    return sah;
+  });
+
+  const semuaSah = hasil.every(Boolean);
+  tombolKirim.disabled = sudahMencobaKirim && !semuaSah;
+
+  return semuaSah;
+}
+
+formSertifikasi.addEventListener("submit", (event) => {
+  event.preventDefault();
+  sudahMencobaKirim = true;
+
+  if (!periksaForm()) {
+    kolomForm.find(({ input }) => !input.validity.valid || !input.value.trim())
+      ?.input.focus();
+  }
+});
+
+formSertifikasi.addEventListener("input", () => {
+  if (sudahMencobaKirim) {
+    periksaForm();
+  }
+});
