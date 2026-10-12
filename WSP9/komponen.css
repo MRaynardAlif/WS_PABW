@@ -1,0 +1,124 @@
+.form-kolom {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);          /* jarak label ke isian, seragam */
+}
+
+form {
+  display: grid;
+  gap: var(--space-4);
+  max-width: 40rem;
+}
+
+label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+input, select, textarea {
+  font: inherit;                /* kolom isian ikut ukuran huruf halaman */
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-fg);
+}
+
+button {
+  font: inherit;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: var(--color-primary);
+  color: var(--color-surface);
+  cursor: pointer;
+}
+
+/* :focus-visible hanya muncul saat pengguna memakai papan ketik */
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* JANGAN seperti ini — pengguna papan ketik kehilangan jejak */
+/* *:focus { outline: none; } */
+
+/* SALAH — form tampak merah padahal pengguna belum menyentuhnya */
+/*input:invalid { border-color: var(--color-danger); }*/
+
+/* BENAR — hanya setelah pengguna mengetik sesuatu yang tidak sah */
+input:user-invalid {
+  border-color: var(--color-danger);
+  border-width: 2px;
+}
+
+/* Pesan galat: sembunyikan selama belum tidak-sah, tampilkan saat perlu */
+.pesan-galat       { display: none; color: var(--color-danger); font-size: var(--text-sm); }
+.form-kolom:has(input:user-invalid) .pesan-galat { display: block; }
+
+.tombol-tema {
+  display: inline-block;
+  color: var(--color-primary);
+  cursor: pointer;
+  font-size: var(--text-sm);
+  text-decoration: underline;
+}
+
+.tema-kontrol:has(.pengalih-tema:focus-visible) .tombol-tema {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.galeri {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: var(--space-4);
+}
+
+.galeri .kartu {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  min-width: 0;
+  min-height: 14rem;
+  gap: var(--space-4);
+  padding: var(--card-pad);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-1);
+}
+
+.kartu__isi {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: var(--space-2);
+}
+
+.kartu__isi p {
+  max-width: none;
+}
+
+.kartu__judul {
+  color: var(--color-primary);
+  overflow-wrap: anywhere;
+}
+
+.kartu__kaki {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.papan img {
+  width: 100%;
+  border-radius: var(--radius-md);
+}
+
+@media (max-width: 20rem) {
+  .galeri {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
