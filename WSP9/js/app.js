@@ -18,9 +18,9 @@ export const daftarProyek = [
     selesai: true
   },
   {
-    judul: "HalalChain",
-    kategori: "Website",
-    teknologi: ["HTML", "CSS", "JavaScript"],
+    judul: "AC FDD & Predictive Maintenance",
+    kategori: "Machine-Learning",
+    teknologi: ["Python", "JavaScript"],
     selesai: false
   }
 ];
