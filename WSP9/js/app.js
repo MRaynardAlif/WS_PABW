@@ -10,7 +10,7 @@ const profil = {
   ]
 };
 
-const daftarProyek = [
+export const daftarProyek = [
   {
     judul: "Halaman CV responsif P6",
     kategori: "Website",

@@ -53,19 +53,6 @@
                 </figure>
             </aside>
 
-            <section aria-labelledby="judul-proyek">
-                <h2 id="judul-proyek">Proyek</h2>
-
-                <div id="filter-proyek">
-                    <button type="button" class="filter" data-kategori="Semua">Semua</button>
-                    <button type="button" class="filter" data-kategori="Website">Website</button>
-                </div>
-
-                <p id="pesan-kosong" hidden>Tidak ada proyek untuk ditampilkan.</p>
-                <div id="daftar-proyek"></div>
-            </section>
-
-
             <section class="utama" id="bagian-2">
                 <h2>Pengalaman Kerja</h2>
 
@@ -139,6 +126,18 @@
                 </div>
             </section>
         </div>
+
+        <section class="utama" aria-labelledby="judul-proyek">
+            <h2 id="judul-proyek">Proyek</h2>
+
+            <div id="filter-proyek">
+                <button type="button" class="filter" data-kategori="Semua">Semua</button>
+                <button type="button" class="filter" data-kategori="Website">Website</button>
+            </div>
+
+            <p id="pesan-kosong" hidden>Tidak ada proyek untuk ditampilkan.</p>
+            <ul id="daftar-proyek" class="galeri" aria-label="Daftar proyek"></ul>
+        </section>
 
         <section id="bagian-3">
             <h2>Sertifikasi</h2>
