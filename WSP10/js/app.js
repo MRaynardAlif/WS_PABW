@@ -83,14 +83,45 @@ console.table(daftarProyek);
 console.table(proyekTerurut);
 */
 
-export async function ambilProyek() {
+import { ambilProyek } from "./api.js";
+import {
+  aturMemuat,
+  render,
+  sembunyikanGalat,
+  tampilkanGalat,
+} from "./dom.js";
+
+const filterProyek = document.querySelector("#filter-proyek");
+let semuaProyek = [];
+
+async function muatProyek() {
+  aturMemuat(true);
+  sembunyikanGalat();
+
   try {
-    const respons = await fetch(ALAMAT);
-    if (!respons.ok) throw new Error('status ' + respons.status);
-    const data = await respons.json();
-    return data;
+    semuaProyek = await ambilProyek();
+    render(semuaProyek);
   } catch (galat) {
-    console.error('gagal memuat', galat.message);
-    throw galat;
+    tampilkanGalat("Data gagal dimuat. Periksa koneksi, lalu muat ulang halaman.");
+  } finally {
+    aturMemuat(false);
   }
 }
+
+filterProyek.addEventListener("click", (event) => {
+  const tombol = event.target.closest("button[data-kategori]");
+  if (!tombol || semuaProyek.length === 0) return;
+
+  const kategori = tombol.dataset.kategori;
+  const hasil = semuaProyek.filter(
+    (proyek) => kategori === "Semua" || proyek.kategori === kategori
+  );
+
+  sembunyikanGalat();
+  render(hasil);
+});
+
+muatProyek();
+
+const muatUlang = document.querySelector("#reintentar-proyek");
+muatUlang.addEventListener("click", muatProyek);

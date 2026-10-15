@@ -79,9 +79,10 @@ formSertifikasi.addEventListener("input", () => {
 });
 */
 
-import { muat } from "./api.js";
 const wadah = document.querySelector("#daftar-proyek");
 const pesanKosong = document.querySelector("#pesan-kosong");
+const pesanMuat = document.querySelector("#pesan-muat");
+const pesanGalat = document.querySelector("#pesan-galat");
 
 function buatKartu(proyek) {
   const li = document.createElement("li");
@@ -90,28 +91,26 @@ function buatKartu(proyek) {
   return li;
 }
 
-function renderProyek(daftar) {
-  wadah.replaceChildren();
-  pesanKosong.hidden = daftar.length > 0;
+export function render(daftar) {
+  wadah.textContent = "";
+  pesanKosong.hidden = daftar.length !== 0;
   daftar.forEach((proyek) => wadah.append(buatKartu(proyek)));
 }
 
-muat().then(data => renderProyek(data));
+export function aturMemuat(sedangMemuat) {
+  pesanMuat.hidden = !sedangMemuat;
+}
 
-const barisFilter = document.querySelector("#filter-proyek");
+export function tampilkanGalat(pesan) {
+  pesanGalat.textContent = pesan;
+  pesanGalat.hidden = false;
+  pesanGalat.classList.add("is-visible");
+}
 
-barisFilter.addEventListener("click", async (event) => { // 2. Add async here
-  const tombol = event.target.closest("button");
-  if (!tombol) return;
-
-  const kategori = tombol.dataset.kategori;
-  const data = await muat(); // 3. Await the data
-  const terpilih = data.filter(
-    (proyek) => kategori === "Semua" || proyek.kategori === kategori
-  );
-
-  renderProyek(terpilih);
-});
+export function sembunyikanGalat() {
+  pesanGalat.hidden = true;
+  pesanGalat.classList.remove("is-visible");
+}
 
 const formSertifikasi = document.querySelector("#form-sertifikasi");
 const tombolKirim = formSertifikasi.querySelector('button[type="submit"]');
