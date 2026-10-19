@@ -1,20 +1,62 @@
+import { saring } from "./data.js";
 
 const wadah = document.querySelector("#daftar-proyek");
 const pesanKosong = document.querySelector("#pesan-kosong");
 const pesanMuat = document.querySelector("#pesan-muat");
 const pesanGalat = document.querySelector("#pesan-galat");
 
-function buatKartu(proyek) {
+function buatKartu(proyek, favorit) {
   const li = document.createElement("li");
   li.className = "kartu";
-  li.textContent = proyek.judul;
+
+  const isi = document.createElement("div");
+  isi.className = "kartu__isi";
+
+  const judul = document.createElement("h3");
+  judul.className = "kartu__judul";
+  judul.textContent = proyek.judul;
+
+  const kaki = document.createElement("div");
+  kaki.className = "kartu__kaki";
+
+  const tombolFavorit = document.createElement("button");
+  tombolFavorit.type = "button";
+  tombolFavorit.className = "favorit";
+  tombolFavorit.dataset.id = proyek.id;
+  tombolFavorit.textContent = favorit.includes(proyek.id) ? "★" : "☆";
+  tombolFavorit.setAttribute(
+    "aria-label",
+    `Favorit: ${proyek.judul}`
+  );
+
+  isi.append(judul);
+  kaki.append(tombolFavorit);
+  li.append(isi, kaki);
+
   return li;
 }
 
-export function render(daftar) {
+export function render(state) {
   wadah.textContent = "";
-  pesanKosong.hidden = daftar.length !== 0;
-  daftar.forEach((proyek) => wadah.append(buatKartu(proyek)));
+
+  const tampil = saring(state.daftarProyek, state.kategoriAktif);
+
+  document.querySelectorAll("#filter-proyek [data-kategori]").forEach((tombol) => {
+    tombol.classList.toggle(
+      "aktif",
+      tombol.dataset.kategori === state.kategoriAktif
+    );
+  });
+
+  if (tampil.length === 0) {
+    pesanKosong.hidden = false;
+    return;
+  }
+
+  pesanKosong.hidden = true;
+  tampil.forEach((proyek) => {
+    wadah.append(buatKartu(proyek, state.favorit));
+  });
 }
 
 export function aturMemuat(sedangMemuat) {
@@ -59,7 +101,7 @@ export function periksaForm(menunjukkanGalat) {
   return todosSah;
 }
 
-export function enfocarPrimerCampoInvalido() {
+export function cekKolomInvalid() {
   kolomForm
     .find(({ input }) => !input.validity.valid || !input.value.trim())
     ?.input.focus();

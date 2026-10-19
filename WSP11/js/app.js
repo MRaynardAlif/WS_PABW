@@ -1,6 +1,6 @@
 import { ambilProyek } from "./api.js";
 import { pasangPendengar } from "./events.js";
-import { isiProyek } from "./state.js";
+import { isiProyek, muat, pulihkan, state } from "./state.js";
 import {
   aturMemuat,
   sembunyikanGalat,
@@ -21,5 +21,6 @@ async function mulaiProyek() {
   }
 }
 
+pulihkan(muat());
 pasangPendengar({ mulaiProyek });
 mulaiProyek();

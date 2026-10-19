@@ -2,9 +2,11 @@ import {
   state,
   pilihKategori,
   tandaiFormDicoba,
+  tambahFavorit,
+  aturUlang,
 } from "./state.js";
 import {
-  enfocarPrimerCampoInvalido,
+  cekKolomInvalid,
   formSertifikasi,
   periksaForm,
   sembunyikanGalat,
@@ -21,6 +23,9 @@ export function pasangPendengar({ mulaiProyek }) {
     pilihKategori(tombol.dataset.kategori);
   });
 
+  const tombolAturUlang = document.querySelector("#atur-ulang");
+  tombolAturUlang.addEventListener("click", aturUlang);
+
   const muatUlang = document.querySelector("#reintentar-proyek");
   muatUlang.addEventListener("click", mulaiProyek);
 
@@ -29,7 +34,7 @@ export function pasangPendengar({ mulaiProyek }) {
     tandaiFormDicoba();
 
     if (!periksaForm(true)) {
-      enfocarPrimerCampoInvalido();
+      cekKolomInvalid();
     }
   });
 
@@ -37,5 +42,13 @@ export function pasangPendengar({ mulaiProyek }) {
     if (state.formSudahDicoba) {
       periksaForm(true);
     }
+  });
+
+  const daftar = document.querySelector("#daftar-proyek");
+  daftar.addEventListener("click", (event) => {
+    const tombol = event.target.closest(".favorit");
+    if (!tombol) return;
+
+    tambahFavorit(Number(tombol.dataset.id));
   });
 }
