@@ -32,7 +32,7 @@ export function sembunyikanGalat() {
   pesanGalat.classList.remove("is-visible");
 }
 
-const formSertifikasi = document.querySelector("#form-sertifikasi");
+export const formSertifikasi = document.querySelector("#form-sertifikasi");
 const tombolKirim = formSertifikasi.querySelector('button[type="submit"]');
 
 const kolomForm = Array.from(
@@ -42,38 +42,25 @@ const kolomForm = Array.from(
   pesan: kolom.querySelector(".pesan-galat"),
 }));
 
-let sudahMencobaKirim = false;
-
-function periksaForm() {
+export function periksaForm(menunjukkanGalat) {
   const hasil = kolomForm.map(({ input, pesan }) => {
     const sah = input.value.trim() !== "" && input.validity.valid;
 
-    if (sudahMencobaKirim) {
+    if (menunjukkanGalat) {
       input.setAttribute("aria-invalid", String(!sah));
     }
 
-    pesan.classList.toggle("is-visible", sudahMencobaKirim && !sah);
+    pesan.classList.toggle("is-visible", menunjukkanGalat && !sah);
     return sah;
   });
 
-  const semuaSah = hasil.every(Boolean);
-  tombolKirim.disabled = sudahMencobaKirim && !semuaSah;
-
-  return semuaSah;
+  const todosSah = hasil.every(Boolean);
+  tombolKirim.disabled = menunjukkanGalat && !todosSah;
+  return todosSah;
 }
 
-formSertifikasi.addEventListener("submit", (event) => {
-  event.preventDefault();
-  sudahMencobaKirim = true;
-
-  if (!periksaForm()) {
-    kolomForm.find(({ input }) => !input.validity.valid || !input.value.trim())
-      ?.input.focus();
-  }
-});
-
-formSertifikasi.addEventListener("input", () => {
-  if (sudahMencobaKirim) {
-    periksaForm();
-  }
-});
+export function enfocarPrimerCampoInvalido() {
+  kolomForm
+    .find(({ input }) => !input.validity.valid || !input.value.trim())
+    ?.input.focus();
+}
