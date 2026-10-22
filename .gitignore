@@ -1,1 +1,5 @@
 /.zed/
+/WSP12/node_modules/
+/WSP12/dist/
+/WSP12/.env
+/WSP12/.DS_Store
