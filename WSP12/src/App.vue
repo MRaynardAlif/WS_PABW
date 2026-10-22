@@ -3,6 +3,30 @@ import KepalaProfil from './components/KepalaProfil.vue'
 import DaftarProyek from './components/DaftarProyek.vue'
 import FormKontak from './components/FormKontak.vue'
 import { profil } from './data.js'
+import { onMounted, watch } from 'vue'
+import { ambilProyek } from './api.js'
+import {
+  state,
+  simpan,
+  muat,
+  pulihkan,
+  isiProyek,
+} from './state.js'
+
+onMounted(async () => {
+  pulihkan(muat())
+
+  try {
+    const daftar = await ambilProyek()
+    isiProyek(daftar)
+  } catch (error) {
+    state.galat = 'Data gagal dimuat. Periksa koneksi, lalu muat ulang halaman.'
+  } finally {
+    state.memuat = false
+  }
+})
+
+watch(state, (nilai) => simpan(nilai), { deep: true })
 </script>
 
 <template>

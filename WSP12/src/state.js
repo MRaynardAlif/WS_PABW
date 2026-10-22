@@ -1,14 +1,16 @@
-import { render } from "./dom.js";
+import { reactive } from 'vue';
 
-const KUNCI = "pabw-p11";
+const KUNCI = 'pabw-p11';
 const VERSI = 2;
 
-export const state = {
+export const state = reactive({
   daftarProyek: [],
-  kategoriAktif: "Semua",
+  kategoriAktif: 'Semua',
   favorit: [],
   formSudahDicoba: false,
-};
+  memuat: true,
+  galat: '',
+})
 
 export function simpan(state) {
   const isi = {
@@ -37,7 +39,6 @@ export function muat() {
 
 export function pulihkan(isi) {
   if (!isi || isi.versi !== VERSI) return;
-
   state.kategoriAktif = isi.kategoriAktif;
   state.favorit = isi.favorit;
 }
@@ -46,7 +47,6 @@ export function aturUlang() {
   localStorage.removeItem(KUNCI);
   state.kategoriAktif = "Semua";
   state.favorit = [];
-  render(state);
 }
 
 export function tandaiFormDicoba() {
@@ -55,21 +55,14 @@ export function tandaiFormDicoba() {
 
 export function isiProyek(daftar) {
   state.daftarProyek = daftar;
-  render(state);
 }
 
 export function pilihKategori(kategori) {
   if (state.daftarProyek.length === 0) return;
-
   state.kategoriAktif = kategori;
-  simpan(state);
-  render(state);
 }
 
 export function tambahFavorit(id) {
   if (state.favorit.includes(id)) return;
-
   state.favorit = [...state.favorit, id];
-  simpan(state);
-  render(state);
 }
