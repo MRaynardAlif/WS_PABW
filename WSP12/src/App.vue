@@ -1,7 +1,166 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+
 </script>
 
 <template>
-  <HelloWorld />
+    <div class="page">
+        <header>
+            <div class="header-baris">
+                <div>
+                    <p>Curriculum Vitae</p>
+                    <h1>Muhamad Raynard Alif</h1>
+                </div>
+
+                <nav class="navbar" aria-label="Navigasi utama">
+                    <ul>
+                        <li><a href="#bagian-1">Pendidikan</a></li>
+                        <li><a href="#bagian-2">Pengalaman Kerja</a></li>
+                        <li><a href="#bagian-3">Sertifikasi</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="tema-kontrol">
+                <input type="checkbox" id="tema" class="pengalih-tema">
+                <label for="tema" class="tombol-tema">Tema gelap</label>
+            </div>
+        </header>
+
+        <main>
+            <div class="isi">
+                <aside class="papan sisi" aria-label="Profil">
+                    <figure>
+                        <img src="/profil.svg"
+                        alt="Ilustrasi Profil CV"
+                        width="640"
+                        height="640"
+                        loading="lazy">
+                        <figcaption>Profil Muhamad Raynard Alif</figcaption>
+                    </figure>
+                </aside>
+
+                <section class="utama" id="bagian-2">
+                    <h2>Pengalaman Kerja</h2>
+
+                    <div class="galeri" aria-label="Riwayat pekerjaan">
+                        <article class="kartu">
+                            <div class="kartu__isi">
+                                <h3 class="kartu__judul">Cetroo Coffee Cibinong</h3>
+                                <p>Full-time Barista</p>
+                            </div>
+
+                            <div class="kartu__kaki">
+                                <span>2021 - 2022</span>
+                                <span>Pengalaman kerja</span>
+                            </div>
+                        </article>
+
+                        <article class="kartu">
+                            <div class="kartu__isi">
+                                <h3 class="kartu__judul">PT Arsen Kesuma Indonesia</h3>
+                                <p>Junior Programmer</p>
+                            </div>
+
+                            <div class="kartu__kaki">
+                                <span>2023 - 2024</span>
+                                <span>Pengalaman kerja</span>
+                            </div>
+                        </article>
+
+                    </div>
+                </section>
+
+                <section class="sorotan bawah" id="bagian-1">
+                    <h2>Pendidikan</h2>
+
+                    <div class="galeri" aria-label="Riwayat pendidikan">
+                        <article class="kartu">
+                            <div class="kartu__isi">
+                                <h3 class="kartu__judul">Universitas Islam Indonesia</h3>
+                                <p>Informatika</p>
+                            </div>
+
+                            <div class="kartu__kaki">
+                                <span>2020 - Sekarang</span>
+                                <span>Pendidikan</span>
+                            </div>
+                        </article>
+
+                        <article class="kartu">
+                            <div class="kartu__isi">
+                                <h3 class="kartu__judul">Sekolah Menengah Atas</h3>
+                                <p>Pendidikan menengah</p>
+                            </div>
+
+                            <div class="kartu__kaki">
+                                <span>2017 - 2020</span>
+                                <span>Pendidikan</span>
+                            </div>
+                        </article>
+
+                        <article class="kartu">
+                            <div class="kartu__isi">
+                                <h3 class="kartu__judul">Sekolah Menengah Pertama</h3>
+                                <p>Pendidikan dasar lanjutan</p>
+                            </div>
+
+                            <div class="kartu__kaki">
+                                <span>2014 - 2017</span>
+                                <span>Pendidikan</span>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+            </div>
+
+            <section class="utama" aria-labelledby="judul-proyek">
+                <h2 id="judul-proyek">Proyek</h2>
+
+                <div id="filter-proyek">
+                    <button type="button" id="reintentar-proyek" class="filter" data-kategori="Semua">Semua</button>
+                    <button type="button" class="filter" data-kategori="Website">Website</button>
+                    <button type="button" class="filter" data-kategori="Machine-Learning">Machine Learning</button>
+                    <button type="button" class="filter" data-kategori="Lainnya">Lainnya</button>
+                    <button type="button" id="atur-ulang">Reset</button>
+                </div>
+
+                <p id="pesan-kosong" hidden>Tidak ada proyek untuk ditampilkan.</p>
+                <p id="pesan-muat" hidden>Memuat data...</p>
+                <p id="pesan-galat" class="pesan-galat" role="alert" hidden></p>
+                <ul id="daftar-proyek" class="galeri" aria-label="Daftar proyek"></ul>
+            </section>
+
+            <section id="bagian-3">
+                <h2>Sertifikasi</h2>
+
+                <p>Tambahkan sertifikasi melalui formulir berikut.</p>
+
+                <form id="form-sertifikasi" action="/simpan-sertifikasi" method="post" novalidate>
+                    <div class="form-kolom">
+                        <label for="nama-sertifikasi">Nama sertifikasi</label>
+                        <input type="text" id="nama-sertifikasi" name="nama-sertifikasi" required>
+                        <span class="pesan-galat">Masukkan nama sertifikasi.</span>
+                    </div>
+
+                    <div class="form-kolom">
+                        <label for="tanggal-sertifikasi">Tanggal sertifikasi</label>
+                        <input type="date" id="tanggal-sertifikasi" name="tanggal-sertifikasi" required>
+                        <span class="pesan-galat">Masukkan tanggal sertifikasi.</span>
+                    </div>
+
+                    <div class="form-kolom">
+                        <label for="deskripsi-sertifikasi">Deskripsi sertifikasi</label>
+                        <input type="text" id="deskripsi-sertifikasi" name="deskripsi-sertifikasi" required>
+                        <span class="pesan-galat">Masukkan deskripsi sertifikasi.</span>
+                    </div>
+
+                    <button type="submit">Simpan sertifikasi</button>
+                </form>
+            </section>
+        </main>
+
+        <footer>
+            <p>Muhamad Raynard Alif · 20523167 · Kelas D · 2026</p>
+        </footer>
+    </div>
 </template>

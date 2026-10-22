@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "judul": "Halaman CV responsif P6",
+    "kategori": "Website",
+    "selesai": true
+  },
+  {
+    "id": 2,
+    "judul": "AC FDD & Predictive Maintenance",
+    "kategori": "Machine-Learning",
+    "selesai": false
+  }
+]
