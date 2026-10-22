@@ -1,30 +1,13 @@
 <script setup>
-
+import KepalaProfil from './components/KepalaProfil.vue'
+import DaftarProyek from './components/DaftarProyek.vue'
+import FormKontak from './components/FormKontak.vue'
+import { profil } from './data.js'
 </script>
 
 <template>
     <div class="page">
-        <header>
-            <div class="header-baris">
-                <div>
-                    <p>Curriculum Vitae</p>
-                    <h1>Muhamad Raynard Alif</h1>
-                </div>
-
-                <nav class="navbar" aria-label="Navigasi utama">
-                    <ul>
-                        <li><a href="#bagian-1">Pendidikan</a></li>
-                        <li><a href="#bagian-2">Pengalaman Kerja</a></li>
-                        <li><a href="#bagian-3">Sertifikasi</a></li>
-                    </ul>
-                </nav>
-            </div>
-
-            <div class="tema-kontrol">
-                <input type="checkbox" id="tema" class="pengalih-tema">
-                <label for="tema" class="tombol-tema">Tema gelap</label>
-            </div>
-        </header>
+        <KepalaProfil :profil="profil" />
 
         <main>
             <div class="isi">
@@ -113,50 +96,9 @@
                 </section>
             </div>
 
-            <section class="utama" aria-labelledby="judul-proyek">
-                <h2 id="judul-proyek">Proyek</h2>
+            <DaftarProyek />
+            <FormKontak />
 
-                <div id="filter-proyek">
-                    <button type="button" id="reintentar-proyek" class="filter" data-kategori="Semua">Semua</button>
-                    <button type="button" class="filter" data-kategori="Website">Website</button>
-                    <button type="button" class="filter" data-kategori="Machine-Learning">Machine Learning</button>
-                    <button type="button" class="filter" data-kategori="Lainnya">Lainnya</button>
-                    <button type="button" id="atur-ulang">Reset</button>
-                </div>
-
-                <p id="pesan-kosong" hidden>Tidak ada proyek untuk ditampilkan.</p>
-                <p id="pesan-muat" hidden>Memuat data...</p>
-                <p id="pesan-galat" class="pesan-galat" role="alert" hidden></p>
-                <ul id="daftar-proyek" class="galeri" aria-label="Daftar proyek"></ul>
-            </section>
-
-            <section id="bagian-3">
-                <h2>Sertifikasi</h2>
-
-                <p>Tambahkan sertifikasi melalui formulir berikut.</p>
-
-                <form id="form-sertifikasi" action="/simpan-sertifikasi" method="post" novalidate>
-                    <div class="form-kolom">
-                        <label for="nama-sertifikasi">Nama sertifikasi</label>
-                        <input type="text" id="nama-sertifikasi" name="nama-sertifikasi" required>
-                        <span class="pesan-galat">Masukkan nama sertifikasi.</span>
-                    </div>
-
-                    <div class="form-kolom">
-                        <label for="tanggal-sertifikasi">Tanggal sertifikasi</label>
-                        <input type="date" id="tanggal-sertifikasi" name="tanggal-sertifikasi" required>
-                        <span class="pesan-galat">Masukkan tanggal sertifikasi.</span>
-                    </div>
-
-                    <div class="form-kolom">
-                        <label for="deskripsi-sertifikasi">Deskripsi sertifikasi</label>
-                        <input type="text" id="deskripsi-sertifikasi" name="deskripsi-sertifikasi" required>
-                        <span class="pesan-galat">Masukkan deskripsi sertifikasi.</span>
-                    </div>
-
-                    <button type="submit">Simpan sertifikasi</button>
-                </form>
-            </section>
         </main>
 
         <footer>
